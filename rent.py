@@ -1,5 +1,4 @@
 import requests
-import json
 import datetime
 import sys
 import re
@@ -37,11 +36,11 @@ def draw_table(date):
 
 	global success
 	for i in r.json():
-		try:	# 被選中 and 沒取消
-			if success:
-				if i['waitConfirmTime'] and i['statusRent'] != 3:
+		try:
+			if success:	# 欲查詢抽籤結果
+				if i['waitConfirmTime'] and i['statusRent'] != 3:	# 被抽中 & 沒取消
 					table[i['venueName']][i['rentTimePeriod']].append(i['yearUserUnitName'])
-			else:
+			else:		# 欲查詢放籤情形
 				table[i['venueName']][i['rentTimePeriod']].append(i['yearUserUnitName'])
 		except:
 			pass
